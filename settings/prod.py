@@ -10,28 +10,16 @@ ALLOWED_HOSTS = ['*']
 # Database
 # https://docs.djangoproject.com/en/1.10.2/ref/settings/#databases
 
-if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['RDS_DB_NAME'],
+        'USER': os.environ['RDS_USERNAME'],
+        'PASSWORD': os.environ['RDS_PASSWORD'],
+        'HOST': os.environ['RDS_HOSTNAME'],
+        'PORT': os.environ['RDS_PORT'],
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'iotd',
-            'USER': 'iotd',
-            'PASSWORD': 'iotd',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+}
 
 INSTALLED_APPS += ('storages',) # noqa  
 
@@ -50,4 +38,4 @@ MEDIAFILES_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 DEFAULT_FILE_STORAGE = 'evalai.custom_storages.MediaStorage'
 
-BROKER_URL = '%s://%s:%s/%s'%(os.environ['REDIS_PASSWORD'], os.environ['REDIS_HOSTNAME'], os.environ['REDIS_PORT'], os.environ['REDIS_DB'])
+BROKER_URL = '%s://%s:%s/%s'%(os.environ.get('REDIS_PASSWORD', ''), os.environ.get('REDIS_HOSTNAME', ''), os.environ.get('REDIS_PORT', ''), os.environ.get('REDIS_DB', ''))
