@@ -24,7 +24,8 @@
                         <div class="col xs12 s6">
                             <span><md-select ng-model="challenge.phaseName" placeholder="Challenge Phase" class="rm-margin">
                             <md-option ui-sref="web.challenge-main.challenge-page.phase-leaderboard({phaseSplitId:key.id})" value="{{key.id}}" ng-repeat="key in challenge.phaseSplits" ng-show="{{key.visibility}}==3"><span class="font-weight-b">Phase: </span>{{key.challenge_phase_name}}, <span class="font-weight-b">Split: </span> {{key.dataset_split_name}}</md-option>
-                        </md-select></span>
+                            </md-select>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -34,20 +35,37 @@
                             <div ng-if="!challenge.isResult" class="result-wrn">No phase selected.</div>
                             <table ng-if="challenge.isResult && challenge.leaderboard.length" class="highlight">
                                 <thead>
-                                   <tr>
+                                    <tr>
                                         <td class="align-left" data-field="rank">Rank</td>
                                         <td class="align-left" data-field="team">Participant Team</td>
                                         <td class="align-right" ng-repeat="key in challenge.leaderboard[0].leaderboard__schema.labels">{{key}}</td>
                                         <td class="align-right" data-field="submission_time">Last Submission at</td>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr ng-repeat="key in challenge.leaderboard">
+                                <tbody ng-repeat="key in challenge.leaderboard">
+                                    <tr>
                                         <td class="align-left">{{$index+1}}</td>
-                                        <td class="font-weight-b align-left">{{key.submission__participant_team__team_name}}</td>
-                                        <td class="align-right" ng-repeat="score in key.result track by $index" >{{score | number : 2}}</td>
+                                        <td ng-show="challenge.isParticipated" ng-init="toggle[$index] = false" ng-click="toggle[$index] = !toggle[$index]" class="align-left font-weight-b pointer">{{key.submission__participant_team__team_name}}</td>
+                                        <td ng-show="!challenge.isParticipated" class="align-left">{{key.submission__participant_team__team_name}}</td>
+                                        <td class="align-right" ng-repeat="score in key.result track by $index">{{score | number : 2}}</td>
                                         <td class="align-right">
-                                        {{key.submission__submitted_at | number: 0}}&nbsp;{{key.timeSpan}} ago
+                                            {{key.submission__submitted_at | number: 0}}&nbsp;{{key.timeSpan}} ago
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="toggle[$index]" class="ev-super-light-bg">
+                                        <td>
+                                            <a class="pointer">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <h6 class="font-weight-b">Team Members:</h6>
+                                            <p ng-repeat="member in challenge.existTeam.results[0].members">
+                                                {{member.member_name}}</p>
+                                        </td>
+                                        <td colspan="5">
+                                            <h6>Method Description</h6>
+                                            <p>TBD</p>
                                         </td>
                                     </tr>
                                 </tbody>
