@@ -286,3 +286,8 @@ REST_AUTH_SERIALIZERS = {
 
 # For inviting users to participant and host teams.
 ADMIN_EMAIL = "admin@cloudcv.org"
+
+# Celery Broker Url
+CELERY_BROKER_URL = 'amqp://localhost'
+
+SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
