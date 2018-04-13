@@ -59,6 +59,7 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'corsheaders',
+    'django_ses',
     'import_export',
     'rest_auth',
     'rest_auth.registration',
@@ -291,3 +292,4 @@ ADMIN_EMAIL = "admin@cloudcv.org"
 CELERY_BROKER_URL = 'amqp://localhost'
 
 SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
+CLOUDCV_TEAM_EMAIL = "EvalAI Team <team@cloudcv.org>"
