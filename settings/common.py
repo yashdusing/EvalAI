@@ -285,7 +285,7 @@ REST_AUTH_SERIALIZERS = {
 }
 
 # For inviting users to participant and host teams.
-ADMIN_EMAIL = "deshrajdry@gmail.com"
+ADMIN_EMAIL = "admin@cloudcv.org"
 
 # Celery Broker Url
 CELERY_BROKER_URL = 'amqp://localhost'
