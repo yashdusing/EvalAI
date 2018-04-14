@@ -291,5 +291,4 @@ ADMIN_EMAIL = "admin@cloudcv.org"
 # Celery Broker Url
 CELERY_BROKER_URL = 'amqp://localhost'
 
-SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
 CLOUDCV_TEAM_EMAIL = "EvalAI Team <team@cloudcv.org>"
