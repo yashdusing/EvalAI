@@ -33,9 +33,14 @@
         vm.stopLeaderboard = function() {};
         vm.stopFetchingSubmissions = function() {};
         vm.currentDate = null;
+        vm.isPublished = false;
+        vm.sortColumn = 'rank';
+        vm.reverseSort = false;
+        vm.columnIndexSort = 0;
+        // save initial ranking
+        vm.initial_ranking = {};
 
-
-        // loader for existing teams
+      // loader for existing teams
         vm.isExistLoader = false;
         vm.loaderTitle = '';
         vm.loaderContainer = angular.element('.exist-team-card');
@@ -65,7 +70,7 @@
                 var details = response.data;
                 vm.page = details;
                 vm.isActive = details.is_active;
-
+                vm.isPublished = vm.page.published;
 
                 if (vm.page.image === null) {
                     vm.page.image = "dist/images/logo.png";
@@ -372,6 +377,28 @@
 
         utilities.sendRequest(parameters);
 
+        // define a custom sorting function
+        vm.lastKey = null;
+        vm.sortFunction = function(key) {
+            // check which column is selected
+            // so that the values can be parsed properly
+            if (vm.sortColumn === 'date') {
+                return Date.parse(key.submission__submitted_at);
+            }
+            else if (vm.sortColumn === 'rank') {
+                return vm.initial_ranking[key.submission__participant_team__team_name];
+            }
+            else if (vm.sortColumn === 'number') {
+                return parseFloat(key.result[vm.columnIndexSort]);
+            }
+            else if (vm.sortColumn === 'string'){
+                // sort teams alphabetically
+                return key.submission__participant_team__team_name.value;
+            }
+
+            return 0;
+        };
+
         // my submissions
         vm.isResult = false;
 
@@ -401,6 +428,7 @@
                     var details = response.data;
                     vm.leaderboard = details.results;
                     for (var i=0; i<vm.leaderboard.length; i++) {
+                        vm.initial_ranking[vm.leaderboard[i].submission__participant_team__team_name] = i+1;
                         var dateTimeNow = moment(new Date());
                         var submissionTime = moment(vm.leaderboard[i].submission__submitted_at);
                         var duration = moment.duration(dateTimeNow.diff(submissionTime));
@@ -1533,6 +1561,51 @@
                 utilities.sendRequest(parameters);
                 $mdDialog.hide();
             }
+        };
+
+        vm.publishChallenge = function(ev) {
+            ev.stopPropagation();
+            vm.toggleChallengeState = null;
+            vm.publishDesc = null;
+            if (vm.isPublished)
+                vm.toggleChallengeState = "private";
+            else
+                vm.toggleChallengeState = "public";
+
+            var confirm = $mdDialog.confirm()
+                          .title('Make this challenge ' + vm.toggleChallengeState + '?')
+                          .ariaLabel('')
+                          .targetEvent(ev)
+                          .ok('I\'m sure')
+                          .cancel('No.');
+
+            $mdDialog.show(confirm).then(function() {
+                parameters.url = "challenges/challenge_host_team/" + vm.page.creator.id + "/challenge/" + vm.page.id;
+                parameters.method = 'PATCH';
+                parameters.data = {
+                    "published": !vm.isPublished,
+                };
+                vm.isPublished = !vm.isPublished;
+                parameters.callback = {
+                    onSuccess: function(response) {
+                        var status = response.status;
+                        if (status === 200) {
+                            $mdDialog.hide();
+                            $rootScope.notify("success", "The challenge was successfully made " + vm.toggleChallengeState);
+                        }
+                    },
+                    onError: function(response) {
+                        $mdDialog.hide();
+                        vm.page.description = vm.tempDesc;
+                        var error = response.data;
+                        $rootScope.notify("error", error);
+                    }
+                };
+
+                utilities.sendRequest(parameters);
+            }, function() {
+            // Nope
+            });
         };
 
         $scope.$on('$destroy', function() {

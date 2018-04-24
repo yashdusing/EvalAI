@@ -103,6 +103,14 @@ a.active-challenge {
     color: red;
 }
 
+.chip-green {
+    background-color: #9CCC65;
+}
+
+.chip-red {
+    background-color: #EF5350;
+}
+
 .result-wrn {
     margin-top: 15px;
 }
@@ -134,4 +142,9 @@ a.active-challenge {
 
 i.star {
     font-size: 1rem;
+}
+
+.margin-top-btm {
+    margin-top: 10px;
+    margin-bottom: 25px;
 }
