@@ -13,5 +13,5 @@ angular
 		'toaster',
 		'angularTrix',
 		'angularMoment',
-		'ngclipboard',
+		'ngclipboard'
 	]);
