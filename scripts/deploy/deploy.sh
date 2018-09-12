@@ -18,16 +18,17 @@ build_and_push() {
         done
 }
 
-if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
-    build_and_push $TRAVIS_BRANCH $TRAVIS_COMMIT
-    echo "Skipping deploy to staging or production server; The request or commit is not on staging or production branch"
-    exit 0
+build_and_push staging $TRAVIS_COMMIT
 
-elif [ "${TRAVIS_BRANCH}" == "staging" -o "${TRAVIS_BRANCH}" == "production" ]; then
-    build_and_push $TRAVIS_BRANCH $TRAVIS_COMMIT
-    exit 0
+# if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+#     echo "Skipping deploy to staging or production server; The request or commit is not on staging or production branch"
+#     exit 0
 
-else
-    echo "Skipping deploy!"
-    exit 0
-fi
+# elif [ "${TRAVIS_BRANCH}" == "staging" -o "${TRAVIS_BRANCH}" == "production" ]; then
+#     build_and_push $TRAVIS_BRANCH $TRAVIS_COMMIT
+#     exit 0
+
+# else
+#     echo "Skipping deploy!"
+#     exit 0
+# fi
