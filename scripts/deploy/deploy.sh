@@ -13,12 +13,13 @@ build_and_push() {
         # It is used to tag & push the images with latest tag
         for image in $images
         do
-            docker tag "${image}":"$2" "${image}":"latest"
-            docker push "${image}":"latest"
+            docker tag ${image}:$2 ${image}:"latest"
+            docker push ${image}:"latest"
         done
 }
 
 if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+    build_and_push $TRAVIS_BRANCH $TRAVIS_COMMIT
     echo "Skipping deploy to staging or production server; The request or commit is not on staging or production branch"
     exit 0
 
