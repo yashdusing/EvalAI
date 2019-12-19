@@ -15,7 +15,7 @@ from challenges.aws_utils import (
     start_workers,
 )
 
-
+@mock_ecs
 class BaseTestClass(APITestCase):
     def setUp(self):
         self.client = APIClient(enforce_csrf_checks=True)
