@@ -18,6 +18,7 @@ from challenges.aws_utils import (
 @mock_ecs
 class BaseTestClass(APITestCase):
     def setUp(self):
+        print('hello world')
         self.client = APIClient(enforce_csrf_checks=True)
 
         self.ecs_client = boto3.client(

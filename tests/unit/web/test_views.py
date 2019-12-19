@@ -14,7 +14,9 @@ from django.test import Client
 from django.test import TestCase
 
 from web.views import page_not_found, internal_server_error
-from evalai.urls import handler404, handler500
+#from evalai.urls import handler404, handler500
+handler404 = "web.views.page_not_found"
+handler500 = "web.views.internal_server_error"
 
 
 class BaseAPITestCase(APITestCase):
