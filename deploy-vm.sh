@@ -45,4 +45,4 @@ echo "Step 3"
 sudo docker-compose --version 
 
 # Pull images & run containers 
-sudo docker-compose -f docker-compose-local.yml up --build 
+sudo docker-compose -f docker-compose-local.yml up
