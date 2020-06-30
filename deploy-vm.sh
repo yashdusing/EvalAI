@@ -33,8 +33,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 echo "Finished installing docker-compose. Check docker-compose version"
 sudo docker-compose --version 
 
+export DJANGO_SERVER_URL=temp
+
 # Pull images & run containers 
-sudo docker-compose -f docker-compose-local.yml up -d
+sudo docker-compose -f docker-compose-local-nginx.yml up -d --build
 
 #Restore database
 DOCKER_DB_NAME="$(sudo docker-compose ps -q db)"

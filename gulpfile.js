@@ -220,6 +220,26 @@ function configDev() {
         .pipe(gulp.dest('frontend/dist/js/'))
 }
 
+
+/*
+config for vm machines
+*/
+function configVm() {
+    configJson.vm.EnvironmentConfig.API = process.env.DJANGO_SERVER_URL;
+    console.log("Hey Yash ! Django server at ", configJson.vm.EnvironmentConfig.API);
+    return gulp.src('frontend/src/js/config.sample.js')
+        .pipe(replace('moduleName', 'evalai-config'))
+        .pipe(replace('constantName', Object.keys(configJson.vm)))
+        .pipe(replace('configKey', Object.keys(configJson.vm.EnvironmentConfig)))
+        .pipe(replace('configValue', configJson.vm.EnvironmentConfig.API))
+        .pipe(rename({
+            basename: 'config'
+        }))
+        .pipe(gulp_if(production, rename({ suffix: '.min' })))
+        .pipe(gulp.dest('frontend/dist/js/'));
+}
+
+
 /*
 Inject path of css and js files in index.html 
 */
@@ -315,6 +335,11 @@ gulp.task('dev', gulp.series(clean, function(done) {
     production = false;
     done();
 }, parallelTasks, configDev, injectpaths, lint));
+
+gulp.task('vm', gulp.series(clean ,function(done) {
+    production = false;
+    done();
+}, parallelTasks, configVm, injectpaths, lint, gulp.parallel(watch, startServer)));
 
 gulp.task('dev:runserver', gulp.series(clean ,function(done) {
     production = false;

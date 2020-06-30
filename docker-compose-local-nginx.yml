@@ -61,7 +61,8 @@ services:
       context: ./
       dockerfile: docker/prod/nodejs/Dockerfile
       args:
-        NODE_ENV: production
+        NODE_ENV: vm
+        DJANGO_SERVER_URL: ${DJANGO_SERVER_URL}
     ports:
       - "80:80"
       - "443:443"
