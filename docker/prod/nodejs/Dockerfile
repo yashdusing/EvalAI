@@ -19,6 +19,8 @@ RUN npm install
 RUN bower install --allow-root
 ADD frontend /code/frontend
 
+RUN echo "YASH ${DJANGO_SERVER_URL}"
+
 RUN gulp ${NODE_ENV}
 
 FROM nginx:1.13-alpine
