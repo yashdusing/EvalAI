@@ -208,6 +208,7 @@ function configStaging() {
 config for dev server
 */
 function configDev() {
+    console.log("Hey ! ", configJson.local.EnvironmentConfig.API);
     return gulp.src('frontend/src/js/config.sample.js')
         .pipe(replace('moduleName', 'evalai-config'))
         .pipe(replace('constantName', Object.keys(configJson.local)))
@@ -217,7 +218,7 @@ function configDev() {
             basename: 'config'
         }))
         .pipe(gulp_if(production, rename({ suffix: '.min' })))
-        .pipe(gulp.dest('frontend/dist/js/'))
+        .pipe(gulp.dest('frontend/dist/js/'));
 }
 
 
