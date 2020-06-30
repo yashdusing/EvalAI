@@ -225,8 +225,6 @@ function configDev() {
 config for vm machines
 */
 function configVm() {
-    configJson.vm.EnvironmentConfig.API = process.env.DJANGO_SERVER_URL;
-    console.log("Hey Yash ! Django server at ", process.env.DJANGO_SERVER_URL);
     return gulp.src('frontend/src/js/config.sample.js')
         .pipe(replace('moduleName', 'evalai-config'))
         .pipe(replace('constantName', Object.keys(configJson.vm)))

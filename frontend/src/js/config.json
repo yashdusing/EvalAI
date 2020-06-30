@@ -16,7 +16,7 @@
     },
     "vm": {
         "EnvironmentConfig": {
-            "API": "http://django_server/api"
+            "API": "http://evalai.yashdusing.me.uk/api/"
         }
     }
 }
