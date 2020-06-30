@@ -58,7 +58,7 @@ services:
 
   nodejs:
     environment:
-      - DJANGO_SERVER_URL: "${DJANGO_SERVER_URL}"
+      - DJANGO_SERVER_URL="${DJANGO_SERVER_URL}"
     build:
       context: ./
       dockerfile: docker/prod/nodejs/Dockerfile
