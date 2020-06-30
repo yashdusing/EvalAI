@@ -336,9 +336,9 @@ gulp.task('dev', gulp.series(clean, function(done) {
 }, parallelTasks, configDev, injectpaths, lint));
 
 gulp.task('vm', gulp.series(clean ,function(done) {
-    production = false;
+    production = true;
     done();
-}, parallelTasks, configVm, injectpaths, lint, gulp.parallel(watch, startServer)));
+}, parallelTasks, configVm, injectpaths, lint));
 
 gulp.task('dev:runserver', gulp.series(clean ,function(done) {
     production = false;
