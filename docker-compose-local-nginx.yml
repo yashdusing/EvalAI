@@ -61,7 +61,7 @@ services:
       context: ./
       dockerfile: docker/prod/nodejs/Dockerfile
       args:
-        NODE_ENV: production
+        NODE_ENV: vm
     ports:
       - "80:80"
       - "443:443"
