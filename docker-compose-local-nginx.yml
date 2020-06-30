@@ -58,7 +58,7 @@ services:
 
   nodejs:
     environment:
-      - DJANGO_SERVER_URL="${DJANGO_SERVER_URL}"
+      - DJANGO_SERVER_URL='http://evalai.yashdusing.me.uk:8000/api/'
     build:
       context: ./
       dockerfile: docker/prod/nodejs/Dockerfile
