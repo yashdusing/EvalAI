@@ -1,7 +1,7 @@
 {
     "local": {
         "EnvironmentConfig": {
-            "API": "http://localhost:8000/api/"
+            "API": "https://evalapi.yashdusing.me.uk/api/"
         }
     },
     "staging": {
@@ -11,7 +11,7 @@
     },
     "production": {
         "EnvironmentConfig": {
-            "API": "https://evalapi.cloudcv.org/api/"
+            "API": "https://evalapi.yashdusing.me.uk/api/"
         }
     }
 }
