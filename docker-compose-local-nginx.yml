@@ -57,13 +57,13 @@ services:
       - .:/code
 
   nodejs:
+    environment: 
+      - DJANGO_SERVER_URL: ${DJANGO_SERVER_URL}
     build:
       context: ./
       dockerfile: docker/prod/nodejs/Dockerfile
       args:
         NODE_ENV: vm
-      environment: 
-        - DJANGO_SERVER_URL: ${DJANGO_SERVER_URL}
     ports:
       - "80:80"
       - "443:443"
