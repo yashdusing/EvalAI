@@ -16,7 +16,7 @@
     },
     "vm": {
         "EnvironmentConfig": {
-            "API": "http://evalai.yashdusing.me.uk/api/"
+            "API": "http://evalai.yashdusing.me.uk:8000/api/"
         }
     }
 }
