@@ -56,15 +56,15 @@ services:
     volumes:
       - .:/code
 
-	nodejs:
-		build:
-			context: ./
-			dockerfile: docker/prod/nodejs/Dockerfile
-			args:
-				NODE_ENV: production
-		ports:
-			- "80:80"
-			- "443:443"
-		volumes:
-			- /code/node_modules
-			- /code/bower_components
+  nodejs:
+    build:
+      context: ./
+      dockerfile: docker/prod/nodejs/Dockerfile
+      args:
+        NODE_ENV: production
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /code/node_modules
+      - /code/bower_components
