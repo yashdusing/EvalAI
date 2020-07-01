@@ -1,7 +1,7 @@
 {
     "local": {
         "EnvironmentConfig": {
-            "API": "http://evalai.yashdusing.me.uk:8000/api/"
+            "API": "http://localhost:8000/"
         }
     },
     "staging": {
@@ -11,12 +11,12 @@
     },
     "production": {
         "EnvironmentConfig": {
-            "API": "http://evalai.yashdusing.me.uk:8000/api/"
+            "API": "http://evalapi.cloudcv.org/api/"
         }
     },
     "vm": {
         "EnvironmentConfig": {
-            "API": "http://evalai.yashdusing.me.uk:8000/api/"
+            "API": "http://evalapi.yashdusing.me.uk/api/"
         }
     }
 }
