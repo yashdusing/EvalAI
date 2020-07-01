@@ -39,7 +39,7 @@ export DJANGO_SERVER_URL=temp
 sudo docker-compose -f docker-compose-local-nginx.yml up -d --build
 
 #Restore database
-DOCKER_DB_NAME="$(sudo docker-compose ps -q db)"
+DOCKER_DB_NAME="$(sudo docker-compose -f docker-compose-local-nginx.yml ps -q db)"
 LOCAL_DUMP_PATH=$(ls -t backups/* | head -1)
 
 if [ -n "${DUMP_FILE}" ]
