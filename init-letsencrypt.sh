@@ -15,14 +15,14 @@ fi
 
 
 if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/ssl-dhparams.pem" ]; then
-  echo "### Downloading recommended TLS parameters ..."
+  echo "\n### Downloading recommended TLS parameters ...\n\n"
   mkdir -p "$data_path/conf"
   curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf > "$data_path/conf/options-ssl-nginx.conf"
   curl -s https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem > "$data_path/conf/ssl-dhparams.pem"
   echo
 fi
 
-echo "### Creating dummy certificate for $domains ..."
+echo "\n### Creating dummy certificate for $domains ...\n"
 path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
 sudo docker-compose -f docker-compose-local-nginx.yml run --rm --entrypoint "\
@@ -33,11 +33,11 @@ sudo docker-compose -f docker-compose-local-nginx.yml run --rm --entrypoint "\
 echo
 
 
-echo "### Starting nginx ..."
+echo "\n### Starting nginx ...\n"
 sudo docker-compose -f docker-compose-local-nginx.yml up --force-recreate -d nodejs
 echo
 
-echo "### Deleting dummy certificate for $domains ..."
+echo "\n### Deleting dummy certificate for $domains ...\n"
 sudo docker-compose -f docker-compose-local-nginx.yml run --rm --entrypoint "\
   rm -Rf /etc/letsencrypt/live/$domains && \
   rm -Rf /etc/letsencrypt/archive/$domains && \
@@ -45,7 +45,7 @@ sudo docker-compose -f docker-compose-local-nginx.yml run --rm --entrypoint "\
 echo
 
 
-echo "### Requesting Let's Encrypt certificate for $domains ..."
+echo "\n### Requesting Let's Encrypt certificate for $domains ...\n"
 #Join $domains to -d args
 domain_args=""
 for domain in "${domains[@]}"; do
@@ -71,5 +71,5 @@ sudo docker-compose -f docker-compose-local-nginx.yml run --rm --entrypoint "\
     --force-renewal" certbot
 echo
 
-echo "### Reloading nginx ..."
+echo "\n### Reloading nginx ...\n"
 sudo docker-compose -f docker-compose-local-nginx.yml exec nodejs nginx -s reload
