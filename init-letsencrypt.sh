@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains=(yashdusing.me.uk evalai.yashdusing.me.uk)
+domains=(yashdusing.me.uk evalai.yashdusing.me.uk evalapi.yashdusing.me.uk)
 rsa_key_size=4096
 data_path="./certbot"
 email="yashdusing145@gmail.com" # Adding a valid address is strongly recommended
