@@ -72,4 +72,4 @@ sudo docker-compose -f docker-compose-local-nginx.yml run --rm --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-sudo docker-compose -f docker-compose-local-nginx.yml exec nginx nodejs -s reload
+sudo docker-compose -f docker-compose-local-nginx.yml exec nodejs nginx -s reload
