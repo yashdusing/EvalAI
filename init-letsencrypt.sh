@@ -37,7 +37,7 @@ echo "### Starting nginx ..."
 echo
 sudo docker-compose -f docker-compose-local-nginx.yml up --force-recreate -d nodejs
 echo
-'
+
 echo "### Deleting dummy certificate for $domains ..."
 echo
 sudo docker-compose -f docker-compose-local-nginx.yml run --rm --entrypoint "\
@@ -77,4 +77,3 @@ echo
 echo "### Reloading nginx ..."
 echo
 sudo docker-compose -f docker-compose-local-nginx.yml exec nodejs nginx -s reload
-'
