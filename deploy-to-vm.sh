@@ -33,9 +33,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 echo "### Finished installing docker-compose. Check docker-compose version"
 sudo docker-compose --version 
 
-export DJANGO_SERVER_URL=temp
-
-
 echo "### Initiating letsencrypt with certbot"
 chmod +x init-letsencrypt.sh
 ./init-letsencrypt.sh
