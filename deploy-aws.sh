@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $(sudo which docker) && $(sudo docker --version) ]]; then   #[ -x "$(command -v docker)" ];
+if ! [[ $(sudo which docker) && $(sudo docker --version) ]]; then   #[ -x "$(command -v docker)" ];
         
     # Install requirements (docker)
     echo "### Removing existing docker libs"
@@ -33,7 +33,7 @@ if [[ $(sudo which docker) && $(sudo docker --version) ]]; then   #[ -x "$(comma
 fi
 
 
-if [[ $(sudo which docker-compose) && $(sudo docker-compose --version) ]]; then   #[ -x "$(command -v docker)" ];
+if ! [[ $(sudo which docker-compose) && $(sudo docker-compose --version) ]]; then   #[ -x "$(command -v docker)" ];
 
     echo "### Installing docker-compose"
     sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
