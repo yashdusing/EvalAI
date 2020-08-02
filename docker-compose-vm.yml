@@ -1,5 +1,6 @@
 version: "3"
 services:
+  '
   db:
     image: postgres:10.4
     ports:
@@ -27,6 +28,7 @@ services:
       - BACKUP_KEEP_WEEKS=4
       - BACKUP_KEEP_MONTHS=6
       - HEALTHCHECK_PORT=81
+  '
 
   sqs:
     image: pakohan/elasticmq
@@ -42,7 +44,7 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      '- db'
       - sqs
     volumes:
       - .:/code

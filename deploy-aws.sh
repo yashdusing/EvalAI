@@ -52,6 +52,7 @@ chmod +x init-letsencrypt.sh
 sudo docker-compose -f docker-compose-vm.yml up -d --build
 
 # Restore database
+'
 sudo mkdir backups
 DOCKER_DB_NAME="$(sudo docker-compose -f docker-compose-vm.yml ps -q db)"
 LOCAL_DUMP_PATH=$(ls -t backups/* | head -1)
@@ -64,3 +65,4 @@ then
 else
     echo "# No backup file exists"
 fi
+'
