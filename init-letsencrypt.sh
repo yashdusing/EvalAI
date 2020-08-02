@@ -40,7 +40,7 @@ sudo docker-compose -f docker-compose-vm.yml run --rm --entrypoint "\
 
 
 echo "### Starting nginx ..."
-sudo docker-compose -f docker-compose-vm.yml up --force-recreate nodejs
+sudo docker-compose -f docker-compose-vm.yml up --force-recreate -d nodejs
 
 echo "### Deleting dummy certificate for $domains ..."
 sudo docker-compose -f docker-compose-vm.yml run --rm --entrypoint "\
@@ -75,4 +75,3 @@ sudo docker-compose -f docker-compose-vm.yml run --rm --entrypoint "\
 
 echo "### Reloading nginx ..."
 sudo docker-compose -f docker-compose-vm.yml exec nodejs nginx -s reload
-
