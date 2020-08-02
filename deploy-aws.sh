@@ -49,7 +49,7 @@ chmod +x init-letsencrypt.sh
 ./init-letsencrypt.sh
 
 # Pull images & run containers 
-sudo docker-compose -f docker-compose-vm.yml up -d --build
+sudo docker-compose -f docker-compose-vm.yml up --build
 
 # Restore database
 '
