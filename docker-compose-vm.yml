@@ -1,34 +1,32 @@
 version: "3"
 services:
-  '
-  db:
-    image: postgres:10.4
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./backups:/backups
+  # db:
+  #   image: postgres:10.4
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - ./backups:/backups
 
-  pgbackups:
-    image: prodrigestivill/postgres-backup-local
-    restart: always
-    volumes:
-      - ./backups:/backups
-    links:
-      - db:db
-    depends_on:
-      - db
-    environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_EXTRA_OPTS=-Z9 --schema=public --blobs
-      - SCHEDULE=@daily
-      - BACKUP_KEEP_DAYS=7
-      - BACKUP_KEEP_WEEKS=4
-      - BACKUP_KEEP_MONTHS=6
-      - HEALTHCHECK_PORT=81
-  '
+  # pgbackups:
+  #   image: prodrigestivill/postgres-backup-local
+  #   restart: always
+  #   volumes:
+  #     - ./backups:/backups
+  #   links:
+  #     - db:db
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - POSTGRES_HOST=db
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_EXTRA_OPTS=-Z9 --schema=public --blobs
+  #     - SCHEDULE=@daily
+  #     - BACKUP_KEEP_DAYS=7
+  #     - BACKUP_KEEP_WEEKS=4
+  #     - BACKUP_KEEP_MONTHS=6
+  #     - HEALTHCHECK_PORT=81
 
   sqs:
     image: pakohan/elasticmq
@@ -44,7 +42,7 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      '- db'
+      # - db
       - sqs
     volumes:
       - .:/code
