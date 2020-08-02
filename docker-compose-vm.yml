@@ -40,7 +40,7 @@ services:
       - docker/dev/docker.env
     build:
       context: ./
-      dockerfile: docker/prod/django/Dockerfile
+      dockerfile: docker/dev/django/Dockerfile
     ports:
       - "8000:8000"
     depends_on:
