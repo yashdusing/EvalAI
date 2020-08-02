@@ -49,20 +49,20 @@ chmod +x init-letsencrypt.sh
 ./init-letsencrypt.sh
 
 # Pull images & run containers 
-sudo docker-compose -f docker-compose-vm.yml up --build
+sudo docker-compose -f docker-compose-vm.yml up -d --build
 
 # Restore database
-'
-sudo mkdir backups
-DOCKER_DB_NAME="$(sudo docker-compose -f docker-compose-vm.yml ps -q db)"
-LOCAL_DUMP_PATH=$(ls -t backups/* | head -1)
 
-if [ -n "${LOCAL_DUMP_PATH}" ]
-then    
-    echo "# Backup file exists: ${LOCAL_DUMP_PATH}"
-    echo "# Restoring latest postgres backup"
-    sudo docker exec -it "${DOCKER_DB_NAME}" gunzip -c "${LOCAL_DUMP_PATH}" | psql -h db -p 5432 -U postgres -d postgres
-else
-    echo "# No backup file exists"
-fi
-'
+# sudo mkdir backups
+# DOCKER_DB_NAME="$(sudo docker-compose -f docker-compose-vm.yml ps -q db)"
+# LOCAL_DUMP_PATH=$(ls -t backups/* | head -1)
+
+# if [ -n "${LOCAL_DUMP_PATH}" ]
+# then    
+#     echo "# Backup file exists: ${LOCAL_DUMP_PATH}"
+#     echo "# Restoring latest postgres backup"
+#     sudo docker exec -it "${DOCKER_DB_NAME}" gunzip -c "${LOCAL_DUMP_PATH}" | psql -h db -p 5432 -U postgres -d postgres
+# else
+#     echo "# No backup file exists"
+# fi
+
