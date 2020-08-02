@@ -38,7 +38,9 @@ services:
     hostname: django
     env_file:
       - docker/dev/docker.env
-    image: yashdusing/evalai_django:latest
+    build:
+      context: ./
+      dockerfile: docker/prod/django/Dockerfile
     ports:
       - "8000:8000"
     depends_on:
