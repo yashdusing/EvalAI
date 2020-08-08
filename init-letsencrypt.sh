@@ -4,11 +4,9 @@ touch .env
 
 read -p "Enter RDS Host : " POSTGRES_HOST
 echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
-echo "" >> .env
 
 read -p "Enter Hostname : " HOSTNAME
 echo "HOSTNAME=$HOSTNAME" >> .env
-echo "" >> .env
 
 read -p "Enter your domain name (example.com) : " DOMAIN_NAME
 echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
