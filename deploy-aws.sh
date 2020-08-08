@@ -44,11 +44,6 @@ if ! [[ $(sudo which docker-compose) && $(sudo docker-compose --version) ]]; the
 
 fi
 
-touch .env
-
-echo "### User input"
-./read_input.sh
-
 echo "### Initiating letsencrypt with certbot"
 ./init-letsencrypt.sh
 

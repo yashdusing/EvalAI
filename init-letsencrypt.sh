@@ -1,5 +1,7 @@
 #!/bin/bash
 
+touch .env
+
 read -p "Enter RDS Host : " POSTGRES_HOST
 echo "POSTGRES_HOST=$POSTGRES_HOST" > .env
 echo "" > .env
