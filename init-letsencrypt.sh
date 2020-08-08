@@ -1,10 +1,9 @@
 #!/bin/bash
 
 read -p "Enter your domain name (example.com) : " DOMAIN_NAME
-domains=($DOMAIN_NAME evalai.$DOMAIN_NAME evalapi.$DOMAIN_NAME)
-
-touch .env
 echo "DOMAIN_NAME=$DOMAIN_NAME" > .env
+
+domains=($DOMAIN_NAME evalai.$DOMAIN_NAME evalapi.$DOMAIN_NAME)
 
 rsa_key_size=4096
 data_path="./certbot"
