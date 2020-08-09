@@ -51,6 +51,7 @@ LIMIT_CONCURRENT_SUBMISSION_PROCESSING = os.environ.get(
 DJANGO_SETTINGS_MODULE = os.environ.get(
     "DJANGO_SETTINGS_MODULE", "settings.dev"
 )
+VM_ENV = eval(os.environ.get("VM_ENV", False))
 
 CHALLENGE_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "challenge_data")
 SUBMISSION_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "submission_files")
@@ -639,7 +640,7 @@ def get_or_create_sqs_queue(queue_name):
         Returns the SQS Queue object
     """
     if settings.DEBUG or settings.TEST:
-        logger.info('No SQS Queue')
+        print('No SQS Queue')
         sqs = boto3.resource(
             "sqs",
             endpoint_url=os.environ.get("AWS_SQS_ENDPOINT", "http://sqs:9324"),
@@ -648,7 +649,7 @@ def get_or_create_sqs_queue(queue_name):
             aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
         )
     else:
-        logger.info('SQS Queue !!')
+        print('SQS Queue !!')
         sqs = boto3.resource(
             "sqs",
             region_name=os.environ.get("AWS_DEFAULT_REGION", "us-east-1"),
