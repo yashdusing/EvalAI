@@ -2,6 +2,18 @@
 
 touch .env
 
+read -p "Enter AWS Access key ID : " AWS_ACCESS_KEY_ID
+echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> .env
+
+read -p "Enter AWS Account ID : " AWS_ACCOUNT_ID
+echo "AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID" >> .env
+
+read -p "Enter AWS Default Region (eg: us-east-1) : " AWS_DEFAULT_REGION
+echo "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" >> .env
+
+read -p "Enter AWS secret access key : " AWS_SECRET_ACCESS_KEY
+echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env
+
 read -p "Enter Hostname : " HOSTNAME
 echo "HOSTNAME=$HOSTNAME" >> .env
 
