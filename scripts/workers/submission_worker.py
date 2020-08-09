@@ -640,6 +640,7 @@ def get_or_create_sqs_queue(queue_name):
         Returns the SQS Queue object
     """
     if not VM_ENV and settings.DEBUG or settings.TEST:
+        logger.info('No SQS Queue')
         sqs = boto3.resource(
             "sqs",
             endpoint_url=os.environ.get("AWS_SQS_ENDPOINT", "http://sqs:9324"),
@@ -648,6 +649,7 @@ def get_or_create_sqs_queue(queue_name):
             aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
         )
     else:
+        logger.info('SQS Queue !!')
         sqs = boto3.resource(
             "sqs",
             region_name=os.environ.get("AWS_DEFAULT_REGION", "us-east-1"),
