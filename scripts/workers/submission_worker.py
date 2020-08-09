@@ -51,7 +51,6 @@ LIMIT_CONCURRENT_SUBMISSION_PROCESSING = os.environ.get(
 DJANGO_SETTINGS_MODULE = os.environ.get(
     "DJANGO_SETTINGS_MODULE", "settings.dev"
 )
-VM_ENV = eval(os.environ.get("VM_ENV", False))
 
 CHALLENGE_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "challenge_data")
 SUBMISSION_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "submission_files")
@@ -639,7 +638,7 @@ def get_or_create_sqs_queue(queue_name):
     Returns:
         Returns the SQS Queue object
     """
-    if not VM_ENV and settings.DEBUG or settings.TEST:
+    if settings.DEBUG or settings.TEST:
         logger.info('No SQS Queue')
         sqs = boto3.resource(
             "sqs",

@@ -95,7 +95,9 @@ urlpatterns = [
 ]
 
 # DJANGO-SPAGHETTI-AND-MEATBALLS URLs available during development only.
-if settings.DEBUG:
+VM_ENV = eval(os.environ.get("VM_ENV", False))
+
+if VM_ENV or settings.DEBUG:
     urlpatterns += [
         url(r"^dbschema/", include("django_spaghetti.urls")),
         url(r"^docs/", include("rest_framework_docs.urls")),
