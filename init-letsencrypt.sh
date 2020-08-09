@@ -3,7 +3,7 @@
 touch .env
 
 read -p "Enter AWS Access key ID : " AWS_ACCESS_KEY_ID
-echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> .env
+echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" > .env
 
 read -p "Enter AWS Account ID : " AWS_ACCOUNT_ID
 echo "AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID" >> .env
