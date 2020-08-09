@@ -639,6 +639,10 @@ def get_or_create_sqs_queue(queue_name):
         Returns the SQS Queue object
     """
     if settings.DEBUG or settings.TEST:
+        logger.info('SETTINGS.DEBUG')
+        logger.info(settings.DEBUG)
+        logger.info('SETTINGS.TEST')
+        logger.info(settings.TEST)
         sqs = boto3.resource(
             "sqs",
             endpoint_url=os.environ.get("AWS_SQS_ENDPOINT", "http://sqs:9324"),
