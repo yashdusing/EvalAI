@@ -700,7 +700,7 @@ def main():
     if challenge_pk:
         q_params["pk"] = challenge_pk
 
-    if not VM_ENV and settings.DEBUG or settings.TEST:
+    if settings.DEBUG or settings.TEST:
         if eval(LIMIT_CONCURRENT_SUBMISSION_PROCESSING):
             if not challenge_pk:
                 logger.exception(
@@ -727,7 +727,7 @@ def main():
     queue = get_or_create_sqs_queue(queue_name)
     while True:
         for message in queue.receive_messages():
-            if not VM_ENV and settings.DEBUG or settings.TEST:
+            if settings.DEBUG or settings.TEST:
                 if eval(LIMIT_CONCURRENT_SUBMISSION_PROCESSING):
                     current_running_submissions_count = Submission.objects.filter(
                         challenge_phase__challenge=challenge.id,
