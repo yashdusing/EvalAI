@@ -647,7 +647,7 @@ def get_or_create_sqs_queue(queue_name):
     Returns:
         Returns the SQS Queue object
     """
-    if settings.DEBUG or settings.TEST:
+    if eval(settings.DEBUG) or eval(settings.TEST):
         logger.info('SETTINGS.DEBUG')
         logger.info(settings.DEBUG)
         logger.info('SETTINGS.TEST')
