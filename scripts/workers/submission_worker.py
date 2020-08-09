@@ -51,6 +51,7 @@ LIMIT_CONCURRENT_SUBMISSION_PROCESSING = os.environ.get(
 DJANGO_SETTINGS_MODULE = os.environ.get(
     "DJANGO_SETTINGS_MODULE", "settings.dev"
 )
+VM_ENV = eval(os.environ.get("VM_ENV", False))
 
 CHALLENGE_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "challenge_data")
 SUBMISSION_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "submission_files")
@@ -638,7 +639,7 @@ def get_or_create_sqs_queue(queue_name):
     Returns:
         Returns the SQS Queue object
     """
-    if settings.DEBUG or settings.TEST:
+    if not VM_ENV and settings.DEBUG or settings.TEST:
         sqs = boto3.resource(
             "sqs",
             endpoint_url=os.environ.get("AWS_SQS_ENDPOINT", "http://sqs:9324"),
@@ -699,7 +700,7 @@ def main():
     if challenge_pk:
         q_params["pk"] = challenge_pk
 
-    if settings.DEBUG or settings.TEST:
+    if not VM_ENV and settings.DEBUG or settings.TEST:
         if eval(LIMIT_CONCURRENT_SUBMISSION_PROCESSING):
             if not challenge_pk:
                 logger.exception(
@@ -726,7 +727,7 @@ def main():
     queue = get_or_create_sqs_queue(queue_name)
     while True:
         for message in queue.receive_messages():
-            if settings.DEBUG or settings.TEST:
+            if not VM_ENV and settings.DEBUG or settings.TEST:
                 if eval(LIMIT_CONCURRENT_SUBMISSION_PROCESSING):
                     current_running_submissions_count = Submission.objects.filter(
                         challenge_phase__challenge=challenge.id,

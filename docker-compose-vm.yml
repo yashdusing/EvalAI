@@ -15,6 +15,7 @@ services:
       - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
       - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - VM_ENV=True
     build:
       context: ./
       dockerfile: docker/vm/django/Dockerfile
@@ -37,6 +38,7 @@ services:
       - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
       - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - VM_ENV=True
     build:
       context: ./
       dockerfile: docker/vm/worker/Dockerfile

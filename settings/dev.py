@@ -6,7 +6,7 @@ import warnings
 # Database
 # https://docs.djangoproject.com/en/1.10.2/ref/settings/#databases
 
-DEBUG = False
+DEBUG = True
 
 TEST = False
 
