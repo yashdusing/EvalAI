@@ -40,6 +40,8 @@ logger.info('SETTINGS.DEBUG')
 logger.info(settings.DEBUG)
 logger.info('SETTINGS.TEST')
 logger.info(settings.TEST)
+logger.info(type(settings.TEST))
+logger.info(type(settings.DEBUG))
 
 logger.info('Test file env')
 logger.info(os.environ.get("TESTING_FILE", "env file not used"))
@@ -647,7 +649,7 @@ def get_or_create_sqs_queue(queue_name):
     Returns:
         Returns the SQS Queue object
     """
-    if eval(settings.DEBUG) or eval(settings.TEST):
+    if settings.DEBUG or settings.TEST:
         logger.info('SETTINGS.DEBUG')
         logger.info(settings.DEBUG)
         logger.info('SETTINGS.TEST')
