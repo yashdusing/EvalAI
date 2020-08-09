@@ -6,9 +6,9 @@ import warnings
 # Database
 # https://docs.djangoproject.com/en/1.10.2/ref/settings/#databases
 
-DEBUG = eval(os.environ.get("DEBUG", True))
+DEBUG = False
 
-TEST = eval(os.environ.get("TEST", False))
+TEST = False
 
 ALLOWED_HOSTS = ["*"]
 
