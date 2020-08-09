@@ -1,36 +1,42 @@
 #!/bin/bash
 
-touch .env
+read -p "Skip reading variable (not for first time usage)? (y/N) " skip_input
+  if [ "$skip_input" != "Y" ] && [ "$skip_input" != "y" ]; then
+    touch .env
 
-read -p "Enter AWS Access key ID : " AWS_ACCESS_KEY_ID
-echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" > .env
+    read -p "Enter AWS Access key ID : " AWS_ACCESS_KEY_ID
+    echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" > .env
 
-read -p "Enter AWS Account ID : " AWS_ACCOUNT_ID
-echo "AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID" >> .env
+    read -p "Enter AWS Account ID : " AWS_ACCOUNT_ID
+    echo "AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID" >> .env
 
-read -p "Enter AWS Default Region (eg: us-east-1) : " AWS_DEFAULT_REGION
-echo "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" >> .env
+    read -p "Enter AWS Default Region (eg: us-east-1) : " AWS_DEFAULT_REGION
+    echo "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION" >> .env
 
-read -p "Enter AWS secret access key : " AWS_SECRET_ACCESS_KEY
-echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env
+    read -p "Enter AWS secret access key : " AWS_SECRET_ACCESS_KEY
+    echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env
 
-read -p "Enter Hostname : " HOSTNAME
-echo "HOSTNAME=$HOSTNAME" >> .env
+    read -p "Enter Hostname : " HOSTNAME
+    echo "HOSTNAME=$HOSTNAME" >> .env
 
-read -p "Enter Postgres Hostname : " POSTGRES_HOST
-echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
+    read -p "Enter Postgres Hostname : " POSTGRES_HOST
+    echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
 
-read -p "Enter Postgres DB Name : " POSTGRES_NAME
-echo "POSTGRES_NAME=$POSTGRES_NAME" >> .env
+    read -p "Enter Postgres DB Name : " POSTGRES_NAME
+    echo "POSTGRES_NAME=$POSTGRES_NAME" >> .env
 
-read -p "Enter Postgres Username : " POSTGRES_USER
-echo "POSTGRES_USER=$POSTGRES_USER" >> .env
+    read -p "Enter Postgres Username : " POSTGRES_USER
+    echo "POSTGRES_USER=$POSTGRES_USER" >> .env
 
-read -p "Enter Postgres Password : " POSTGRES_PASSWORD
-echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
+    read -p "Enter Postgres Password : " POSTGRES_PASSWORD
+    echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
+
+    read -p "Enter your domain name (example.com) : " DOMAIN_NAME
+    echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
+
+  fi
 
 read -p "Enter your domain name (example.com) : " DOMAIN_NAME
-echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
 
 domains=($DOMAIN_NAME evalai.$DOMAIN_NAME evalapi.$DOMAIN_NAME)
 
