@@ -2,11 +2,20 @@
 
 touch .env
 
-read -p "Enter RDS Host : " POSTGRES_HOST
-echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
-
 read -p "Enter Hostname : " HOSTNAME
 echo "HOSTNAME=$HOSTNAME" >> .env
+
+read -p "Enter RDS Hostname : " RDS_HOSTNAME
+echo "RDS_HOSTNAME=$RDS_HOSTNAME" >> .env
+
+read -p "Enter RDS DB Name : " RDS_DB_NAME
+echo "RDS_DB_NAME=$RDS_DB_NAME" >> .env
+
+read -p "Enter RDS Username : " RDS_USERNAME
+echo "RDS_USERNAME=$RDS_USERNAME" >> .env
+
+read -p "Enter RDS Password : " RDS_PASSWORD
+echo "RDS_PASSWORD=$RDS_PASSWORD" >> .env
 
 read -p "Enter your domain name (example.com) : " DOMAIN_NAME
 echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
