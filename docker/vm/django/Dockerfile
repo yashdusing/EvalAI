@@ -4,9 +4,9 @@ ENV PYTHONUNBUFFERED 1
 
 RUN mkdir /code
 WORKDIR /code
+
 ADD requirements/* /code/
-RUN pip install -r prod.txt
 
-ADD . /code
+RUN pip install -r dev.txt
 
-CMD ["sh", "/code/docker/vm/django/container-start.sh"]
+CMD ["sh", "/code/docker/dev/django/container-start.sh"]

@@ -1,11 +1,12 @@
 from .common import *  # noqa: ignore=F405
+import os
 
 import warnings
 
 # Database
 # https://docs.djangoproject.com/en/1.10.2/ref/settings/#databases
 
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", True)
 
 ALLOWED_HOSTS = ["*"]
 
