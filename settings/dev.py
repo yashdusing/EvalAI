@@ -8,6 +8,8 @@ import warnings
 
 DEBUG = os.environ.get("DEBUG", True)
 
+TEST = os.environ.get("TEST", False)
+
 ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
