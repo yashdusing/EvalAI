@@ -124,7 +124,7 @@ from .utils import (
     get_missing_keys_from_dict,
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("django")
 
 try:
     xrange  # Python 2
@@ -677,6 +677,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
     """
     Creates a challenge using a zip file.
     """
+    print('A')
     challenge_host_team = get_challenge_host_team_model(challenge_host_team_pk)
 
     serializer = ChallengeConfigSerializer(
@@ -688,6 +689,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
     else:
         response_data = serializer.errors
         return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+    print('B')
 
     # All files download and extract location.
     BASE_LOCATION = tempfile.mkdtemp()
@@ -717,6 +719,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         response_data = {"error": message}
         logger.exception(message)
         return Response(response_data, status=status.HTTP_406_NOT_ACCEPTABLE)
+    print('C')
 
     # Extract zip file
     try:
@@ -740,6 +743,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
             yaml_file = name
             extracted_folder_name = yaml_file.split(basename(yaml_file))[0]
             yaml_file_count += 1
+    print('D')
 
     if not yaml_file_count:
         message = "There is no YAML file in zip file you uploaded!"
@@ -754,6 +758,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         response_data = {"error": message}
         logger.info(message)
         return Response(response_data, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    print('E')
 
     try:
         with open(
@@ -777,6 +783,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         response_data = {"error": message}
         return Response(response_data, status=status.HTTP_406_NOT_ACCEPTABLE)
 
+    print('F')
+
     # Check for evaluation script path in yaml file.
     try:
         evaluation_script = yaml_file_data["evaluation_script"]
@@ -794,6 +802,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         response_data = {"error": message}
         return Response(response_data, status=status.HTTP_406_NOT_ACCEPTABLE)
 
+    print('G')
+
     # Check for evaluation script file in extracted zip folder.
     if isfile(evaluation_script_path):
         with open(evaluation_script_path, "rb") as challenge_evaluation_script:
@@ -808,6 +818,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         response_data = {"error": message}
         return Response(response_data, status=status.HTTP_406_NOT_ACCEPTABLE)
 
+    print('H')
+
     # Check for test annotation file path in yaml file.
     try:
         challenge_phases_data = yaml_file_data["challenge_phases"]
@@ -818,6 +830,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         )
         response_data = {"error": message}
         return Response(response_data, status=status.HTTP_406_NOT_ACCEPTABLE)
+    print('I')
 
     for data in challenge_phases_data:
         test_annotation_file = data["test_annotation_file"]
@@ -861,6 +874,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
             response_data = {"error": message}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
+        print('J')
+
         # To ensure that the schema for submission meta attributes is valid.
         if data.get("submission_meta_attributes"):
             for attribute in data["submission_meta_attributes"]:
@@ -899,6 +914,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
                     return Response(
                         response_data, status=status.HTTP_406_NOT_ACCEPTABLE
                     )
+    print('K')
 
     # Check for challenge image in yaml file.
     image = yaml_file_data.get("image")
@@ -918,6 +934,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
             challenge_image_file = None
     else:
         challenge_image_file = None
+
+    print('L')
 
     # check for challenge description file
     try:
@@ -942,6 +960,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         )
         response_data = {"error": message}
         return Response(response_data, status.HTTP_406_NOT_ACCEPTABLE)
+
+    print('M')
 
     # check for evaluation details file
     try:
@@ -968,6 +988,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         response_data = {"error": message}
         return Response(response_data, status.HTTP_406_NOT_ACCEPTABLE)
 
+    print('N')
     # check for terms and conditions file
     try:
         challenge_terms_and_cond_file_path = join(
@@ -992,6 +1013,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         response_data = {"error": message}
         return Response(response_data, status.HTTP_406_NOT_ACCEPTABLE)
 
+    print('O')
+
     # Check for submission guidelines file
     try:
         submission_guidelines_file_path = join(
@@ -1015,7 +1038,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         )
         response_data = {"error": message}
         return Response(response_data, status.HTTP_406_NOT_ACCEPTABLE)
-
+    
+    print('P')
     # Check for leaderboard schema in YAML file
     leaderboard_schema = yaml_file_data.get("leaderboard")
     """
@@ -1059,7 +1083,8 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
         )
         response_data = {"error": message}
         return Response(response_data, status.HTTP_406_NOT_ACCEPTABLE)
-
+    
+    print('Q')
     try:
         with transaction.atomic():
             serializer = ZipChallengeSerializer(
@@ -1224,6 +1249,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
                     host.save()
                 challenge.participant_teams.add(participant_host_team)
 
+            print('R')
             zip_config.challenge = challenge
             zip_config.save()
 
@@ -1245,6 +1271,7 @@ def create_challenge_using_zip_file(request, challenge_host_team_pk):
                 }
                 send_slack_notification(message=message)
 
+            print('S')
             response_data = {
                 "success": "Challenge {} has been created successfully and"
                 " sent for review to EvalAI Admin.".format(challenge.title)
