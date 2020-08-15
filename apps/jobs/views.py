@@ -72,7 +72,7 @@ from .utils import (
     is_url_valid,
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("django")
 
 
 @swagger_auto_schema(
@@ -121,7 +121,7 @@ logger = logging.getLogger(__name__)
 @authentication_classes((ExpiringTokenAuthentication,))
 def challenge_submission(request, challenge_id, challenge_phase_id):
     """API Endpoint for making a submission to a challenge"""
-    print('AAA')
+    logger.info('AAA')
     # check if the challenge exists or not
     try:
         challenge = Challenge.objects.get(pk=challenge_id)
