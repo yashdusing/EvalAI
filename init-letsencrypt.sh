@@ -31,7 +31,7 @@ read -p "Skip reading variable (not for first time usage)? (y/N) " skip_input
     read -p "Enter RDS Password : " RDS_PASSWORD
     echo "RDS_PASSWORD=$RDS_PASSWORD" >> .env
 
-    read -p "Enter AWS_STORAGE_BUCKET_NAME: " AWS_STORAGE_BUCKET_NAME
+    read -p "Enter AWS S3 Bucket Name: " AWS_STORAGE_BUCKET_NAME
     echo "AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME" >> .env
 
     read -p "Enter your domain name (example.com) : " DOMAIN_NAME
