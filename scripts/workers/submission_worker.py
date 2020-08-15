@@ -30,7 +30,7 @@ from django.utils import timezone
 BASE_TEMP_DIR = tempfile.mkdtemp()
 COMPUTE_DIRECTORY_PATH = join(BASE_TEMP_DIR, "compute")
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("django")
 django.setup()
 
 # Load django app settings
@@ -660,6 +660,7 @@ def get_or_create_sqs_queue(queue_name):
         queue_name = "evalai_submission_queue"
     # Check if the queue exists. If no, then create one
     print(queue_name)
+    logger.info(queue_name)
     try:
         queue = sqs.get_queue_by_name(QueueName=queue_name)
     except botocore.exceptions.ClientError as ex:
