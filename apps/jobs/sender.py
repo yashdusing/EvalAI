@@ -23,6 +23,7 @@ def get_or_create_sqs_queue(queue_name):
         Returns the SQS Queue object
     """
     if settings.DEBUG or settings.TEST:
+        print('Unfortunately no queue was created')
         sqs = boto3.resource(
             "sqs",
             endpoint_url=os.environ.get("AWS_SQS_ENDPOINT", "http://sqs:9324"),
@@ -33,6 +34,7 @@ def get_or_create_sqs_queue(queue_name):
         # Use default queue name in dev and test environment
         queue_name = "evalai_submission_queue"
     else:
+        print('Got actual queue')
         sqs = boto3.resource(
             "sqs",
             region_name=os.environ.get("AWS_DEFAULT_REGION", "us-east-1"),
@@ -70,6 +72,8 @@ def publish_submission_message(message):
         Returns SQS response
     """
 
+    print('1')
+
     try:
         challenge = Challenge.objects.get(pk=message["challenge_pk"])
     except Challenge.DoesNotExist:
@@ -79,10 +83,17 @@ def publish_submission_message(message):
             )
         )
         return
+    print('2')
     queue_name = challenge.queue
     slack_url = challenge.slack_webhook_url
     queue = get_or_create_sqs_queue(queue_name)
     response = queue.send_message(MessageBody=json.dumps(message))
+
+    print('3')
+    print('YASH QUEUE  -> ')
+    print(queue_name)
+    print(queue)
+    print(response)
     # send slack notification
     if slack_url:
         challenge_name = challenge.title

@@ -121,7 +121,7 @@ logger = logging.getLogger(__name__)
 @authentication_classes((ExpiringTokenAuthentication,))
 def challenge_submission(request, challenge_id, challenge_phase_id):
     """API Endpoint for making a submission to a challenge"""
-
+    print('AAA')
     # check if the challenge exists or not
     try:
         challenge = Challenge.objects.get(pk=challenge_id)
@@ -137,6 +137,8 @@ def challenge_submission(request, challenge_id, challenge_phase_id):
     except ChallengePhase.DoesNotExist:
         response_data = {"error": "Challenge Phase does not exist"}
         return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+    print('BBB')
 
     if request.method == "GET":
         # getting participant team object for the user for a particular challenge.
@@ -207,7 +209,8 @@ def challenge_submission(request, challenge_id, challenge_phase_id):
                     return Response(
                         response_data, status=status.HTTP_403_FORBIDDEN
                     )
-
+            
+        print('CCC')
         participant_team_id = get_participant_team_id_of_user_for_a_challenge(
             request.user, challenge_id
         )
@@ -220,6 +223,7 @@ def challenge_submission(request, challenge_id, challenge_phase_id):
                 "error": "You haven't participated in the challenge"
             }
             return Response(response_data, status=status.HTTP_403_FORBIDDEN)
+        print('DDD')
 
         all_participants_email = participant_team.get_all_participants_email()
         for participant_email in all_participants_email:
@@ -244,6 +248,8 @@ def challenge_submission(request, challenge_id, challenge_phase_id):
             challenge_phase=challenge_phase,
             status__in=submissions_in_progress_status,
         ).count()
+
+        print('EEE')
 
         if (
             submissions_in_progress
@@ -281,6 +287,8 @@ def challenge_submission(request, challenge_id, challenge_phase_id):
                 "submission_meta_attributes"
             ] = submission_meta_attributes
 
+        print('FFF')
+
         serializer = SubmissionSerializer(
             data=request.data,
             context={
@@ -308,6 +316,7 @@ def challenge_submission(request, challenge_id, challenge_phase_id):
                 return Response(
                     response_data, status=status.HTTP_400_BAD_REQUEST
                 )
+        print('GGG')
 
         if serializer.is_valid():
             serializer.save()
@@ -315,6 +324,7 @@ def challenge_submission(request, challenge_id, challenge_phase_id):
             submission = serializer.instance
             message["submission_pk"] = submission.id
             # publish message in the queue
+            print('HHH')
             publish_submission_message(message)
             return Response(response_data, status=status.HTTP_201_CREATED)
         return Response(
