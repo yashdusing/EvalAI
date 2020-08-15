@@ -100,7 +100,8 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 LOGGING["root"] = {  # noqa
     "level": "INFO",
-    "handlers": ["console", "sentry", "logfile"],
+    #"handlers": ["console", "sentry", "logfile"],
+    "handlers": ["console", "logfile"],
 }
 '''
 LOGGING["handlers"]["sentry"] = {  # noqa
