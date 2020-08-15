@@ -19,17 +19,20 @@ read -p "Skip reading variable (not for first time usage)? (y/N) " skip_input
     read -p "Enter Hostname : " HOSTNAME
     echo "HOSTNAME=$HOSTNAME" >> .env
 
-    read -p "Enter Postgres Hostname : " POSTGRES_HOST
-    echo "POSTGRES_HOST=$POSTGRES_HOST" >> .env
+    read -p "Enter RDS Hostname : " RDS_HOSTNAME
+    echo "RDS_HOSTNAME=$RDS_HOSTNAME" >> .env
 
-    read -p "Enter Postgres DB Name : " POSTGRES_NAME
-    echo "POSTGRES_NAME=$POSTGRES_NAME" >> .env
+    read -p "Enter RDS DB Name : " RDS_DB_NAME
+    echo "RDS_DB_NAME=$RDS_DB_NAME" >> .env
 
-    read -p "Enter Postgres Username : " POSTGRES_USER
-    echo "POSTGRES_USER=$POSTGRES_USER" >> .env
+    read -p "Enter RDS Username : " RDS_USERNAME
+    echo "RDS_USERNAME=$RDS_USERNAME" >> .env
 
-    read -p "Enter Postgres Password : " POSTGRES_PASSWORD
-    echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> .env
+    read -p "Enter RDS Password : " RDS_PASSWORD
+    echo "RDS_PASSWORD=$RDS_PASSWORD" >> .env
+
+    read -p "Enter AWS_STORAGE_BUCKET_NAME: " AWS_STORAGE_BUCKET_NAME
+    echo "AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME" >> .env
 
     read -p "Enter your domain name (example.com) : " DOMAIN_NAME
     echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env

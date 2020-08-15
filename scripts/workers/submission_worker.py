@@ -51,7 +51,6 @@ LIMIT_CONCURRENT_SUBMISSION_PROCESSING = os.environ.get(
 DJANGO_SETTINGS_MODULE = os.environ.get(
     "DJANGO_SETTINGS_MODULE", "settings.dev"
 )
-VM_ENV = eval(os.environ.get("VM_ENV", False))
 
 CHALLENGE_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "challenge_data")
 SUBMISSION_DATA_BASE_DIR = join(COMPUTE_DIRECTORY_PATH, "submission_files")
@@ -703,7 +702,7 @@ def main():
     if challenge_pk:
         q_params["pk"] = challenge_pk
 
-    if VM_ENV or settings.DEBUG or settings.TEST:
+    if settings.DEBUG or settings.TEST:
         if eval(LIMIT_CONCURRENT_SUBMISSION_PROCESSING):
             if not challenge_pk:
                 logger.exception(
@@ -730,7 +729,7 @@ def main():
     queue = get_or_create_sqs_queue(queue_name)
     while True:
         for message in queue.receive_messages():
-            if VM_ENV or settings.DEBUG or settings.TEST:
+            if settings.DEBUG or settings.TEST:
                 if eval(LIMIT_CONCURRENT_SUBMISSION_PROCESSING):
                     current_running_submissions_count = Submission.objects.filter(
                         challenge_phase__challenge=challenge.id,

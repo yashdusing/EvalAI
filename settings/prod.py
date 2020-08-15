@@ -3,13 +3,20 @@ from .common import *  # noqa: ignore=F405
 import os
 import raven
 
-DEBUG = False
+
+DEBUG = eval(os.environ.get("DEBUG", False))
+
+TEST = eval(os.environ.get("TEST", False))
+
+DOMAIN_NAME = os.environ.get("DOMAIN_NAME")
 
 ALLOWED_HOSTS = [
-    "*.evalai.cloudcv.org",
-    "evalai.cloudcv.org",
-    "evalapi.cloudcv.org",
+    f"*.evalai.{DOMAIN_NAME}",
+    f"evalai.{DOMAIN_NAME}",
+    f"evalapi.{DOMAIN_NAME}",
 ]
+
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 
 # Database
 # https://docs.djangoproject.com/en/1.10.2/ref/settings/#databases
@@ -17,9 +24,9 @@ ALLOWED_HOSTS = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    "evalai.cloudcv.org",
-    "evalai.s3.amazonaws.com",
-    "staging.evalai.cloudcv.org",
+    f"evalai.{DOMAIN_NAME}",
+    f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com",
+    f"staging.evalai.{DOMAIN_NAME}",
 )
 
 DATABASES = {
@@ -41,7 +48,6 @@ MIDDLEWARE += ["middleware.metrics.DatadogMiddleware"]  # noqa
 
 INSTALLED_APPS += ("storages", "raven.contrib.django.raven_compat")  # noqa
 
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_SES_REGION_NAME = os.environ.get("AWS_SES_REGION_NAME")
