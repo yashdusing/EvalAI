@@ -659,6 +659,7 @@ def get_or_create_sqs_queue(queue_name):
     if queue_name == "":
         queue_name = "evalai_submission_queue"
     # Check if the queue exists. If no, then create one
+    print(queue_name)
     try:
         queue = sqs.get_queue_by_name(QueueName=queue_name)
     except botocore.exceptions.ClientError as ex:
