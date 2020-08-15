@@ -84,14 +84,14 @@ REST_FRAMEWORK_DOCS = {"HIDE_DOCS": True}
 CACHES["default"]["LOCATION"] = os.environ.get(  # noqa: ignore=F405
     "MEMCACHED_LOCATION"
 )  # noqa: ignore=F405
-'''
+
 RAVEN_CONFIG = {
     "dsn": os.environ.get("SENTRY_URL"),
     # If you are using git, you can also automatically configure the
     # release based on the git info.
     "release": raven.fetch_git_sha(os.path.dirname(os.pardir)),
 }
-'''
+
 
 # https://docs.djangoproject.com/en/1.10/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -100,10 +100,9 @@ LOGGING["root"] = {  # noqa
     "level": "INFO",
     "handlers": ["console", "sentry", "logfile"],
 }
-'''
+
 LOGGING["handlers"]["sentry"] = {  # noqa
     "level": "ERROR",
     "class": "raven.contrib.django.raven_compat.handlers.SentryHandler",
     "tags": {"custom-tag": "x"},
 }
-'''
