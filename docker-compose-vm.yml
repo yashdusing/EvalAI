@@ -49,6 +49,61 @@ services:
     volumes:
       - .:/code
 
+  # required: auth token
+  # remote-worker:
+  #   env_file:
+  #     - docker/vm/docker_vm.env
+  #   environment: 
+  #     - HOSTNAME=${HOSTNAME}
+  #     - RDS_DB_NAME=${RDS_DB_NAME}
+  #     - RDS_HOSTNAME=${RDS_HOSTNAME}
+  #     - RDS_USERNAME=${RDS_USERNAME}
+  #     - RDS_PASSWORD=${RDS_PASSWORD}
+  #     - RDS_PORT=5432
+  #     - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+  #     - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
+  #     - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+  #     - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+  #     - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
+  #     - DOMAIN_NAME=${DOMAIN_NAME}
+  #     - AUTH_TOKEN=${AUTH_TOKEN}
+  #   build:
+  #     context: ./
+  #     dockerfile: docker/vm/worker/Dockerfile
+  #   command: ["./docker/wait-for-it.sh", "django:8000", "--", "python", "-m", "scripts.workers.remote_submission_worker"]
+  #   depends_on:
+  #     - django
+  #   volumes:
+  #     - .:/code
+
+  celery:
+    env_file:
+      - docker/vm/docker_vm.env
+    environment: 
+      - HOSTNAME=${HOSTNAME}
+      - RDS_DB_NAME=${RDS_DB_NAME}
+      - RDS_HOSTNAME=${RDS_HOSTNAME}
+      - RDS_USERNAME=${RDS_USERNAME}
+      - RDS_PASSWORD=${RDS_PASSWORD}
+      - RDS_PORT=5432
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    build:
+      context: ./
+      dockerfile: docker/vm/celery/Dockerfile
+    depends_on:
+      - django
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region: ${AWS_DEFAULT_REGION}
+        awslogs-group: celery_vm
+        awslogs-create-group: "true"
+
   nodejs:
     build:
       context: ./
