@@ -42,11 +42,11 @@ DATABASES = {
     }
 }
 
-DATADOG_APP_NAME = "EvalAI"
-DATADOG_APP_KEY = os.environ.get("DATADOG_APP_KEY")
-DATADOG_API_KEY = os.environ.get("DATADOG_API_KEY")
+# DATADOG_APP_NAME = "EvalAI"
+# DATADOG_APP_KEY = os.environ.get("DATADOG_APP_KEY")
+# DATADOG_API_KEY = os.environ.get("DATADOG_API_KEY")
 
-MIDDLEWARE += ["middleware.metrics.DatadogMiddleware"]  # noqa
+# MIDDLEWARE += ["middleware.metrics.DatadogMiddleware"]  # noqa
 
 INSTALLED_APPS += ("storages", "raven.contrib.django.raven_compat")  # noqa
 
