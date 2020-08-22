@@ -83,10 +83,16 @@ EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
 # Hide API Docs on production environment
 REST_FRAMEWORK_DOCS = {"HIDE_DOCS": True}
 
-# Port number for the python-memcached cache backend.
-CACHES["default"]["LOCATION"] = os.environ.get(  # noqa: ignore=F405
-    "MEMCACHED_LOCATION"
-)  # noqa: ignore=F405
+# # Port number for the python-memcached cache backend.
+# CACHES["default"]["LOCATION"] = os.environ.get(  # noqa: ignore=F405
+#     "MEMCACHED_LOCATION"
+# )  # noqa: ignore=F405
+
+CACHES = {
+    "default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"},
+    "throttling": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"},
+}
+
 
 RAVEN_CONFIG = {
     "dsn": os.environ.get("SENTRY_URL"),
