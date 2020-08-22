@@ -17,6 +17,8 @@ services:
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
       - DOMAIN_NAME=${DOMAIN_NAME}
+      - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
+      - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
     build:
       context: ./
       dockerfile: docker/vm/django/Dockerfile
@@ -41,6 +43,8 @@ services:
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
       - DOMAIN_NAME=${DOMAIN_NAME}
+      - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
+      - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
     build:
       context: ./
       dockerfile: docker/vm/worker/Dockerfile
@@ -67,6 +71,8 @@ services:
   #     - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
   #     - DOMAIN_NAME=${DOMAIN_NAME}
   #     - AUTH_TOKEN=${AUTH_TOKEN}
+  #     - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
+  #     - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
   #   build:
   #     context: ./
   #     dockerfile: docker/vm/worker/Dockerfile
@@ -92,6 +98,8 @@ services:
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
       - DOMAIN_NAME=${DOMAIN_NAME}
+      - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
+      - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
     build:
       context: ./
       dockerfile: docker/vm/celery/Dockerfile

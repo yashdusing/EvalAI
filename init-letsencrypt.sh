@@ -34,6 +34,15 @@ read -p "Skip reading variable (not for first time usage)? (y/N) " skip_input
     read -p "Enter AWS S3 Bucket Name: " AWS_STORAGE_BUCKET_NAME
     echo "AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME" >> .env
 
+    read -p "Enter AWS SES Region Name : " AWS_SES_REGION_NAME
+    echo "AWS_SES_REGION_NAME=$AWS_SES_REGION_NAME" >> .env
+
+    read -p "Enter AWS SES Region Endpoint : " AWS_SES_REGION_ENDPOINT
+    echo "AWS_SES_REGION_ENDPOINT=$AWS_SES_REGION_ENDPOINT" >> .env
+
+    read -p "Enter Sentry URL : " SENTRY_URL
+    echo "SENTRY_URL=$SENTRY_URL" >> .env
+
     read -p "Enter your domain name (example.com) : " DOMAIN_NAME
     echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
 
