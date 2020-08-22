@@ -28,6 +28,9 @@ CORS_ORIGIN_WHITELIST = (
     f"staging.evalai.{DOMAIN_NAME}",
 )
 
+print('CORS list')
+print(CORS_ORIGIN_WHITELIST)
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
