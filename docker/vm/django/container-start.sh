@@ -2,4 +2,4 @@
 python manage.py migrate --noinput  && \
 python manage.py seed && \
 python manage.py collectstatic --noinput  && \
-uwsgi --ini /code/docker/vm/django/uwsgi.ini
+python manage.py runserver 0.0.0.0:8000
