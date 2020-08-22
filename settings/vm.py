@@ -76,8 +76,8 @@ DEFAULT_FILE_STORAGE = "settings.custom_storages.MediaStorage"
 # Setup Email Backend related settings
 DEFAULT_FROM_EMAIL = "noreply@cloudcv.org"
 
-EMAIL_HOST = "localhost"
-EMAIL_PORT = 1025
+# EMAIL_HOST = "localhost"
+# EMAIL_PORT = 1025
 
 # EMAIL_HOST = os.environ.get("EMAIL_HOST")
 # EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
