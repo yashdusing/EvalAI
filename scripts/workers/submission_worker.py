@@ -639,7 +639,7 @@ def get_or_create_sqs_queue(queue_name):
         Returns the SQS Queue object
     """
     if settings.DEBUG or settings.TEST:
-        print('No SQS Queue')
+        logger.info('No SQS Queue')
         sqs = boto3.resource(
             "sqs",
             endpoint_url=os.environ.get("AWS_SQS_ENDPOINT", "http://sqs:9324"),
@@ -648,7 +648,7 @@ def get_or_create_sqs_queue(queue_name):
             aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
         )
     else:
-        print('SQS Queue !!')
+        logger.info('SQS Queue !!')
         sqs = boto3.resource(
             "sqs",
             region_name=os.environ.get("AWS_DEFAULT_REGION", "us-east-1"),
@@ -658,7 +658,7 @@ def get_or_create_sqs_queue(queue_name):
     if queue_name == "":
         queue_name = "evalai_submission_queue"
     # Check if the queue exists. If no, then create one
-    print(queue_name)
+    logger.info(queue_name)
     logger.info(queue_name)
     try:
         queue = sqs.get_queue_by_name(QueueName=queue_name)

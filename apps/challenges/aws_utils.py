@@ -56,6 +56,7 @@ COMMON_SETTINGS_DICT = {
     "CLUSTER": os.environ.get("CLUSTER", "evalai-prod-cluster"),
     "DJANGO_SERVER": os.environ.get("DJANGO_SERVER", "localhost"),
     "DEBUG": settings.DEBUG,
+    "TEST": settings.TEST,
     "EMAIL_HOST": settings.EMAIL_HOST,
     "EMAIL_HOST_PASSWORD": settings.EMAIL_HOST_PASSWORD,
     "EMAIL_HOST_USER": settings.EMAIL_HOST_USER,
@@ -128,6 +129,10 @@ task_definition = """
                 {{
                   "name": "DEBUG",
                   "value": "{DEBUG}"
+                }},
+                {{
+                  "name": "TEST",
+                  "value": "{TEST}"
                 }},
                 {{
                   "name": "EMAIL_HOST",
