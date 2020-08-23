@@ -4,9 +4,9 @@ import os
 import raven
 
 
-DEBUG = eval(os.environ.get("DEBUG", False))
+DEBUG = eval(os.environ.get("DEBUG", 'False'))
 
-TEST = eval(os.environ.get("TEST", False))
+TEST = eval(os.environ.get("TEST", 'False'))
 
 DOMAIN_NAME = os.environ.get("DOMAIN_NAME")
 
