@@ -70,6 +70,7 @@ COMMON_SETTINGS_DICT = {
     "RDS_PORT": settings.DATABASES["default"]["PORT"],
     "SECRET_KEY": settings.SECRET_KEY,
     "SENTRY_URL": os.environ.get("SENTRY_URL"),
+    "DOMAIN_NAME": settings.DOMAIN_NAME
 }
 
 VPC_DICT = {
@@ -189,6 +190,10 @@ task_definition = """
                 {{
                   "name": "SENTRY_URL",
                   "value": "{SENTRY_URL}"
+                }},
+                {{
+                  "name": "DOMAIN_NAME",
+                  "value": "{DOMAIN_NAME}"
                 }},
             ],
             "workingDirectory": "/code",
