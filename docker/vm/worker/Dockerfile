@@ -1,4 +1,4 @@
-FROM evalai_django
+FROM yashdusing/evalai-aws-backend:latest
 
 RUN apt-get update && \
   apt-get install -q -y default-jre default-jdk
