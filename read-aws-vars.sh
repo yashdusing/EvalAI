@@ -16,11 +16,8 @@ if [ "$skip_input" != "Y" ] && [ "$skip_input" != "y" ]; then
     read -p "Enter AWS secret access key : " AWS_SECRET_ACCESS_KEY
     echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> .env
 
-    read -p "Enter Django Server (backend) : " DJANGO_SERVER
-    echo "DJANGO_SERVER=$DJANGO_SERVER" >> .env
-
-    read -p "Enter Hostname (frontend) : " HOSTNAME
-    echo "HOSTNAME=$HOSTNAME" >> .env
+    read -p "Enter your domain name (example.com) : " DOMAIN_NAME
+    echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
 
     read -p "Enter RDS Hostname : " RDS_HOSTNAME
     echo "RDS_HOSTNAME=$RDS_HOSTNAME" >> .env
@@ -43,6 +40,15 @@ if [ "$skip_input" != "Y" ] && [ "$skip_input" != "y" ]; then
     read -p "Enter AWS SES Region Endpoint : " AWS_SES_REGION_ENDPOINT
     echo "AWS_SES_REGION_ENDPOINT=$AWS_SES_REGION_ENDPOINT" >> .env
 
+    read -p "Enter Email Host (eg : email-smtp.us-east-1.amazonaws.com) : " EMAIL_HOST
+    echo "EMAIL_HOST=$EMAIL_HOST" >> .env
+
+    read -p "Enter Email Host Name : " EMAIL_HOST_USER
+    echo "EMAIL_HOST_USER=$EMAIL_HOST_USER" >> .env
+
+    read -p "Enter Email Host Password : " EMAIL_HOST_PASSWORD
+    echo "EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD" >> .env
+
     read -p "Enter Sentry URL : " SENTRY_URL
     echo "SENTRY_URL=$SENTRY_URL" >> .env
 
@@ -64,16 +70,10 @@ if [ "$skip_input" != "Y" ] && [ "$skip_input" != "y" ]; then
     read -p "Enter Worker Image (yashdusing/evalai-aws-worker:latest) : " WORKER_IMAGE
     echo "WORKER_IMAGE=$WORKER_IMAGE" >> .env
 
-    read -p "Enter Email Host (eg : email-smtp.us-east-1.amazonaws.com) : " EMAIL_HOST
-    echo "EMAIL_HOST=$EMAIL_HOST" >> .env
+    DJANGO_SERVER="evalapi.${DOMAIN_NAME}"
+    echo "DJANGO_SERVER=$DJANGO_SERVER" >> .env
 
-    read -p "Enter Email Host Name : " EMAIL_HOST_USER
-    echo "EMAIL_HOST_USER=$EMAIL_HOST_USER" >> .env
-
-    read -p "Enter Email Host Password : " EMAIL_HOST_PASSWORD
-    echo "EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD" >> .env
-
-    read -p "Enter your domain name (example.com) : " DOMAIN_NAME
-    echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
+    HOSTNAME="evalai.${DOMAIN_NAME}"
+    echo "HOSTNAME=$HOSTNAME" >> .env
 
 fi
