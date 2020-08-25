@@ -34,16 +34,16 @@ if [ "$skip_input" != "Y" ] && [ "$skip_input" != "y" ]; then
     read -p "Enter AWS S3 Bucket Name: " AWS_STORAGE_BUCKET_NAME
     echo "AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME" >> .env
 
-    read -p "Enter AWS SES Region Name : " AWS_SES_REGION_NAME
+    read -p "Enter AWS SES Region Name (eg : us-east-1): " AWS_SES_REGION_NAME
     echo "AWS_SES_REGION_NAME=$AWS_SES_REGION_NAME" >> .env
 
-    read -p "Enter AWS SES Region Endpoint : " AWS_SES_REGION_ENDPOINT
+    read -p "Enter AWS SES Region Endpoint (eg : email.us-east-1.amazonaws.com): " AWS_SES_REGION_ENDPOINT
     echo "AWS_SES_REGION_ENDPOINT=$AWS_SES_REGION_ENDPOINT" >> .env
 
     read -p "Enter Email Host (eg : email-smtp.us-east-1.amazonaws.com) : " EMAIL_HOST
     echo "EMAIL_HOST=$EMAIL_HOST" >> .env
 
-    read -p "Enter Email Host Name : " EMAIL_HOST_USER
+    read -p "Enter Email Host User : " EMAIL_HOST_USER
     echo "EMAIL_HOST_USER=$EMAIL_HOST_USER" >> .env
 
     read -p "Enter Email Host Password : " EMAIL_HOST_PASSWORD
