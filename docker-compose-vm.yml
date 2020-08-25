@@ -5,32 +5,7 @@ services:
     hostname: django
     env_file:
       - docker/vm/docker_vm.env
-    environment: 
-      - HOSTNAME=${HOSTNAME}
-      - RDS_DB_NAME=${RDS_DB_NAME}
-      - RDS_HOSTNAME=${RDS_HOSTNAME}
-      - RDS_USERNAME=${RDS_USERNAME}
-      - RDS_PASSWORD=${RDS_PASSWORD}
-      - RDS_PORT=5432
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
-      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
-      - DOMAIN_NAME=${DOMAIN_NAME}
-      - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
-      - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
-      - SENTRY_URL={SENTRY_URL}
-      - DJANGO_SERVER=${DJANGO_SERVER}
-      - CLUSTER=${CLUSTER}
-      - EXECUTION_ROLE_ARN=${EXECUTION_ROLE_ARN}
-      - SUBNET_1=${SUBNET_1}
-      - SUBNET_2=${SUBNET_2}
-      - SUBNET_SECURITY_GROUP=${SUBNET_SECURITY_GROUP}
-      - WORKER_IMAGE=${WORKER_IMAGE}
-      - EMAIL_HOST=${EMAIL_HOST}
-      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
-      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - .env
     build:
       context: ./
       dockerfile: docker/vm/django/Dockerfile
@@ -43,32 +18,7 @@ services:
     image: yashdusing/evalai-aws-worker:latest
     env_file:
       - docker/vm/docker_vm.env
-    environment: 
-      - HOSTNAME=${HOSTNAME}
-      - RDS_DB_NAME=${RDS_DB_NAME}
-      - RDS_HOSTNAME=${RDS_HOSTNAME}
-      - RDS_USERNAME=${RDS_USERNAME}
-      - RDS_PASSWORD=${RDS_PASSWORD}
-      - RDS_PORT=5432
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
-      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
-      - DOMAIN_NAME=${DOMAIN_NAME}
-      - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
-      - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
-      - SENTRY_URL={SENTRY_URL}
-      - DJANGO_SERVER=${DJANGO_SERVER}
-      - CLUSTER=${CLUSTER}
-      - EXECUTION_ROLE_ARN=${EXECUTION_ROLE_ARN}
-      - SUBNET_1=${SUBNET_1}
-      - SUBNET_2=${SUBNET_2}
-      - SUBNET_SECURITY_GROUP=${SUBNET_SECURITY_GROUP}
-      - WORKER_IMAGE=${WORKER_IMAGE}
-      - EMAIL_HOST=${EMAIL_HOST}
-      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
-      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - .env
     build:
       context: ./
       dockerfile: docker/vm/worker/Dockerfile
@@ -82,33 +32,7 @@ services:
   #   image: yashdusing/evalai-aws-remote-worker:latest
   #   env_file:
   #     - docker/vm/docker_vm.env
-  #   environment: 
-  #     - HOSTNAME=${HOSTNAME}
-  #     - RDS_DB_NAME=${RDS_DB_NAME}
-  #     - RDS_HOSTNAME=${RDS_HOSTNAME}
-  #     - RDS_USERNAME=${RDS_USERNAME}
-  #     - RDS_PASSWORD=${RDS_PASSWORD}
-  #     - RDS_PORT=5432
-  #     - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-  #     - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
-  #     - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
-  #     - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-  #     - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
-  #     - DOMAIN_NAME=${DOMAIN_NAME}
-  #     - AUTH_TOKEN=${AUTH_TOKEN}
-  #     - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
-  #     - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
-  #     - SENTRY_URL={SENTRY_URL}
-  #     - DJANGO_SERVER=${DJANGO_SERVER}
-  #     - CLUSTER=${CLUSTER}
-  #     - EXECUTION_ROLE_ARN=${EXECUTION_ROLE_ARN}
-  #     - SUBNET_1=${SUBNET_1}
-  #     - SUBNET_2=${SUBNET_2}
-  #     - SUBNET_SECURITY_GROUP=${SUBNET_SECURITY_GROUP}
-  #     - WORKER_IMAGE=${WORKER_IMAGE}
-  #     - EMAIL_HOST=${EMAIL_HOST}
-  #     - EMAIL_HOST_USER=${EMAIL_HOST_USER}
-  #     - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+  #     - .env
   #   build:
   #     context: ./
   #     dockerfile: docker/vm/worker/Dockerfile
@@ -122,32 +46,7 @@ services:
     image: yashdusing/evalai-aws-celery:latest
     env_file:
       - docker/vm/docker_vm.env
-    environment: 
-      - HOSTNAME=${HOSTNAME}
-      - RDS_DB_NAME=${RDS_DB_NAME}
-      - RDS_HOSTNAME=${RDS_HOSTNAME}
-      - RDS_USERNAME=${RDS_USERNAME}
-      - RDS_PASSWORD=${RDS_PASSWORD}
-      - RDS_PORT=5432
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}
-      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
-      - DOMAIN_NAME=${DOMAIN_NAME}
-      - AWS_SES_REGION_NAME=${AWS_SES_REGION_NAME}
-      - AWS_SES_REGION_ENDPOINT=${AWS_SES_REGION_ENDPOINT}
-      - SENTRY_URL={SENTRY_URL}
-      - DJANGO_SERVER=${DJANGO_SERVER}
-      - CLUSTER=${CLUSTER}
-      - EXECUTION_ROLE_ARN=${EXECUTION_ROLE_ARN}
-      - SUBNET_1=${SUBNET_1}
-      - SUBNET_2=${SUBNET_2}
-      - SUBNET_SECURITY_GROUP=${SUBNET_SECURITY_GROUP}
-      - WORKER_IMAGE=${WORKER_IMAGE}
-      - EMAIL_HOST=${EMAIL_HOST}
-      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
-      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - .env
     build:
       context: ./
       dockerfile: docker/vm/celery/Dockerfile
